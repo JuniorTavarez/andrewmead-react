@@ -37,40 +37,47 @@ var user = {
 
 var count = 0;
 var addOne = function addOne() {
-  return console.log('+1');
+  count++;
+  renderCounterApp();
 };
 var subtractOne = function subtractOne() {
-  return console.log('-1');
+  count--;
+  renderCounterApp();
 };
 var reset = function reset() {
-  return console.log('reset');
+  count = 0;
+  renderCounterApp();
 };
-var templateTwo = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
+var renderCounterApp = function renderCounterApp() {
+  var templateTwo = React.createElement(
+    'div',
     null,
-    'Count: ',
-    count
-  ),
-  React.createElement(
-    'button',
-    { onClick: addOne },
-    '+1'
-  ),
-  React.createElement(
-    'button',
-    { onClick: subtractOne },
-    '-1'
-  ),
-  React.createElement(
-    'button',
-    { onClick: reset },
-    'Reset'
-  )
-);
+    React.createElement(
+      'h1',
+      null,
+      'Count: ',
+      count
+    ),
+    React.createElement(
+      'button',
+      { onClick: addOne },
+      '+1'
+    ),
+    React.createElement(
+      'button',
+      { onClick: subtractOne },
+      '-1'
+    ),
+    React.createElement(
+      'button',
+      { onClick: reset },
+      'Reset'
+    )
+  );
 
-var appRoot = document.querySelector('#app');
+  var appRoot = document.querySelector('#app');
 
-ReactDOM.render(templateTwo, appRoot);
+  ReactDOM.render(templateTwo, appRoot);
+};
+
+renderCounterApp();

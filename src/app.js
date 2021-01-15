@@ -26,18 +26,31 @@ const user = {
 };
 
 let count = 0;
-const addOne = () => console.log('+1');
-const subtractOne = () => console.log('-1');
-const reset = () => console.log('reset');
-const templateTwo = (
-  <div>
-    <h1>Count: {count}</h1>
-    <button onClick={addOne}>+1</button>
-    <button onClick={subtractOne}>-1</button>
-    <button onClick={reset}>Reset</button>
-  </div>
-);
+const addOne = () => {
+  count++;
+  renderCounterApp();
+};
+const subtractOne = () => {
+  count--;
+  renderCounterApp();
+};
+const reset = () => {
+  count = 0;
+  renderCounterApp();
+};
+const renderCounterApp = () => {
+  const templateTwo = (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={addOne}>+1</button>
+      <button onClick={subtractOne}>-1</button>
+      <button onClick={reset}>Reset</button>
+    </div>
+  );
 
-const appRoot = document.querySelector('#app');
+  const appRoot = document.querySelector('#app');
 
-ReactDOM.render(templateTwo, appRoot);
+  ReactDOM.render(templateTwo, appRoot);
+};
+
+renderCounterApp();
