@@ -1,83 +1,40 @@
 'use strict';
 
-var appObject = {
-  title: 'Indicition App',
-  subtitle: 'Put your life in the hands of a computer',
-  options: ['one', 'two']
-};
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-// JSX - Javascript XML
-var template = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    appObject.title
-  ),
-  appObject.subtitle && React.createElement(
-    'p',
-    null,
-    ' ',
-    appObject.subtitle,
-    ' '
-  ),
-  React.createElement(
-    'p',
-    null,
-    appObject.options.length > 0 ? appObject.options[0] : appObject.options[1]
-  )
-);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var user = {
-  name: 'Junior',
-  age: 18,
-  location: 'Jersey'
-};
+var Person = function () {
+  function Person() {
+    var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Anonymouse';
+    var age = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-var count = 0;
-var addOne = function addOne() {
-  count++;
-  renderCounterApp();
-};
-var subtractOne = function subtractOne() {
-  count--;
-  renderCounterApp();
-};
-var reset = function reset() {
-  count = 0;
-  renderCounterApp();
-};
-var renderCounterApp = function renderCounterApp() {
-  var templateTwo = React.createElement(
-    'div',
-    null,
-    React.createElement(
-      'h1',
-      null,
-      'Count: ',
-      count
-    ),
-    React.createElement(
-      'button',
-      { onClick: addOne },
-      '+1'
-    ),
-    React.createElement(
-      'button',
-      { onClick: subtractOne },
-      '-1'
-    ),
-    React.createElement(
-      'button',
-      { onClick: reset },
-      'Reset'
-    )
-  );
+    _classCallCheck(this, Person);
 
-  var appRoot = document.querySelector('#app');
+    this.name = name;
+    this.age = age;
+  }
 
-  ReactDOM.render(templateTwo, appRoot);
-};
+  _createClass(Person, [{
+    key: 'getGretting',
+    value: function getGretting() {
+      return 'Hi! ' + this.name + ' ';
+    }
+  }, {
+    key: 'getDescription',
+    value: function getDescription() {
+      return this.name + '  is ' + this.age + ' year(s) old';
+    }
+  }]);
 
-renderCounterApp();
+  return Person;
+}();
+
+var me = new Person('Junior Tavarez', 32);
+
+console.log(me.getGretting());
+console.log(me.getDescription());
+
+var wife = new Person('Rebeca Tavarez');
+console.log(wife);
+console.log(wife.getDescription());

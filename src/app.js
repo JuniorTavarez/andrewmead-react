@@ -1,56 +1,63 @@
 'use strict';
 
-const appObject = {
+const app = {
   title: 'Indicition App',
   subtitle: 'Put your life in the hands of a computer',
-  options: ['one', 'two'],
+  options: [],
 };
 
-// JSX - Javascript XML
-const template = (
-  <div>
-    <h1>{appObject.title}</h1>
-    {appObject.subtitle && <p> {appObject.subtitle} </p>}
-    <p>
-      {appObject.options.length > 0
-        ? appObject.options[0]
-        : appObject.options[1]}
-    </p>
-  </div>
-);
+const onFormSubmit = (e) => {
+  e.preventDefault();
 
-const user = {
-  name: 'Junior',
-  age: 18,
-  location: 'Jersey',
+  const option = e.target.elements.option.value;
+
+  if (option) {
+    app.options.push(option);
+    e.target.elements.option.value = '';
+  }
+  render();
 };
 
-let count = 0;
-const addOne = () => {
-  count++;
-  renderCounterApp();
+const onRemoveAll = () => {
+  app.options.splice(0, app.options.length);
+  render();
 };
-const subtractOne = () => {
-  count--;
-  renderCounterApp();
+
+const onMakeDecision = () => {
+  const randomNum = Math.floor(Math.random() * app.options.length);
+  const option = app.options[randomNum];
+  alert(option);
+  console.log(randomNum);
+  render();
 };
-const reset = () => {
-  count = 0;
-  renderCounterApp();
-};
-const renderCounterApp = () => {
-  const templateTwo = (
+
+const appRoot = document.querySelector('#app');
+
+const render = () => {
+  // JSX - Javascript XML
+  const template = (
     <div>
-      <h1>Count: {count}</h1>
-      <button onClick={addOne}>+1</button>
-      <button onClick={subtractOne}>-1</button>
-      <button onClick={reset}>Reset</button>
+      <h1>{app.title}</h1>
+      {app.subtitle && <p> {app.subtitle} </p>}
+      <p>{app.options.length > 0 ? 'Here are your Options' : 'No options'}</p>
+      <button disabled={app.options.length === 0} onClick={onMakeDecision}>
+        What Should I do?
+      </button>
+      <button onClick={onRemoveAll}>Remove All</button>
+
+      <ol>
+        {app.options.map((option) => {
+          return <li key={option}>{option}</li>;
+        })}
+      </ol>
+      <form action="" onSubmit={onFormSubmit}>
+        <input type="text" name="option" />
+        <button>Add Option</button>
+      </form>
     </div>
   );
 
-  const appRoot = document.querySelector('#app');
-
-  ReactDOM.render(templateTwo, appRoot);
+  ReactDOM.render(template, appRoot);
 };
 
-renderCounterApp();
+render();
